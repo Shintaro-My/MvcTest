@@ -97,6 +97,7 @@ namespace MvcTest.Controllers
         [HttpGet("Employee/Create/{name}")]
         public IActionResult Create()
         {
+            string foo = "bar";
             return View(_context.Department.ToList());
         }
 
