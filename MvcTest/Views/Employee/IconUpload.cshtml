@@ -4,7 +4,7 @@
 
 <hr />
 
-<img id="sample" style="height: 150px; width: 150px;" />
+<img id="sample" class="icon_preview" style="height: 150px; width: 150px;" />
 <div class="row">
     <div class="col-md-4">
         <form method="post" enctype="multipart/form-data" asp-controller="Employee" asp-action="IconUpload">
@@ -34,10 +34,12 @@
         const img = document.querySelector('#sample');
         const file = document.querySelector('#file');
         file.addEventListener('change', e => {
+            img.classList.remove('active');
             const r = new FileReader();
             const f = e.target.files[0];
             r.addEventListener('load', e => {
                 img.src = e.target.result;
+                img.classList.add('active');
             });
             r.readAsDataURL(f);
         });

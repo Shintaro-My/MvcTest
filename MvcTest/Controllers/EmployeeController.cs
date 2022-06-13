@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using MvcTest.Data;
 using MvcTest.Models;
 using MvcTest.Util;
@@ -17,10 +18,12 @@ namespace MvcTest.Controllers
     public class EmployeeController : Controller
     {
         private readonly MvcTestContext _context;
+        private readonly IConfiguration _config;
 
-        public EmployeeController(MvcTestContext context)
+        public EmployeeController(MvcTestContext context, IConfiguration config)
         {
             _context = context;
+            _config = config;
         }
 
         // GET: Employee
@@ -54,7 +57,7 @@ namespace MvcTest.Controllers
         [HttpPost]
         public async Task<IActionResult> IconUpload(IFormFile file)
         {
-            string defaultIconId = "74a3e8fe-86d1-4a50-b703-08da4c490ff0";
+            string defaultIconId = _config.GetValue<string>("sample_icon_id");
 
             if (file == null)
             {
@@ -92,6 +95,89 @@ namespace MvcTest.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> IconChange(int? id)
+        {
+            var employee = await _context.Employee
+                .FirstOrDefaultAsync(m => m.EmployeeId == id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return View(employee);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> IconChange(int? id, IFormFile file)
+        {
+            var employee = await _context.Employee
+                .FirstOrDefaultAsync(m => m.EmployeeId == id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            if (file == null)
+            {
+                return Redirect(nameof(Index));
+            }
+
+            string defaultIconId = employee.PhotoFileName;
+
+            string filename = file.FileName;
+            byte[] content = await file.GetBytesAsync();
+            string filetype = file.ContentType;
+
+            if (!filetype.StartsWith("image/"))
+            {
+                return Redirect(nameof(Create) + "/" + defaultIconId);
+            }
+
+            FileModel fm = new FileModel()
+            {
+                FileId = new Guid(),
+                FileName = filename,
+                FileBin = content,
+                FileType = filetype
+            };
+            try
+            {
+                _context.FileModel.Update(fm);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+
+
+            var current_file = await _context.FileModel
+                .FirstOrDefaultAsync(m => m.FileId.ToString() == employee.PhotoFileName);
+
+            try
+            {
+                _context.FileModel.Remove(current_file);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                employee.PhotoFileName = fm.FileId.ToString();
+                _context.Employee.Update(employee);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return BadRequest();
+            }
+
+            return Redirect("../Index");
+
+        }
 
         // GET: Employee/Create
         [HttpGet("Employee/Create/{name}")]

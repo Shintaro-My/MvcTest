@@ -9,10 +9,11 @@
 <div>
     <h4>Employee</h4>
     <hr />
-    <img
-         style="height: 150px; width: 150px;"
-         src="/File?id=@Html.DisplayFor(model => model.PhotoFileName)"
-    />
+    <img style="height: 150px; width: 150px;"
+         src="/File?id=@Html.DisplayFor(model => model.PhotoFileName)" />
+    <div class="btn_wrap">
+        <a class="linkbtn info" asp-action="IconChange" asp-route-id="@Model.EmployeeId">Change Your Icon</a>
+    </div>
     <dl class="row">
         <!--
         <dt class="col-sm-2">

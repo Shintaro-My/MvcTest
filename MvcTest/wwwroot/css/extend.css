@@ -112,5 +112,12 @@ a.linkbtn.caution {
 }
 
 .linkbtn.info {
-    --btncolor: 179, 244, 134;
+    --btncolor: 0, 31, 63;
+}
+
+.icon_preview {
+    display: none;
+}
+.icon_preview.active {
+    display: block;
 }

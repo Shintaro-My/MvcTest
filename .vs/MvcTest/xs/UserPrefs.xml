@@ -1,0 +1,32 @@
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{BA64AD63-A511-4C91-988C-3023CB4F63DE}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MvcTest/Controllers/FileController.cs">
+    <Files>
+      <File FileName="MvcTest/Controllers/EmployeeController.cs" Line="60" Column="76" />
+      <File FileName="MvcTest/Controllers/FileController.cs" Line="11" Column="22" />
+      <File FileName="MvcTest/appsettings.json" />
+      <File FileName="MvcTest/Startup.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MvcTest" expanded="True">
+            <Node name="MvcTest" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="FileController.cs" selected="True" />
+              </Node>
+              <Node name="Data" expanded="True" />
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.MvcTest PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

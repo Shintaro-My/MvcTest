@@ -35,6 +35,8 @@ namespace MvcTest.Controllers
             return File(file.FileBin, file.FileType);
         }
 
+        // POST: File
+        // <sample>
         [HttpPost]
         [IgnoreAntiforgeryToken]
         public async Task<IActionResult> Index([FromForm] DocumentCreateRequest request)
