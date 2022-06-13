@@ -1,0 +1,50 @@
+@model IEnumerable<MvcTest.Models.Employee>
+
+@{ ViewData["Title"] = "Index"; }
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="IconUpload">Create New</a>
+</p>
+<div class="table_wrap">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Department)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateOfJoining)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfJoining)
+                </td>
+                <td>
+                    <div class="btn_wrap">
+                        <a class="linkbtn" asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a>
+                        <a class="linkbtn" asp-action="Details" asp-route-id="@item.EmployeeId">Details</a>
+                        <a class="linkbtn caution" asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

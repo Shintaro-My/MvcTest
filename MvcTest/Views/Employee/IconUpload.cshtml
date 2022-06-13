@@ -1,0 +1,45 @@
+@{ ViewData["Title"] = "Create"; }
+
+<h1>Icon</h1>
+
+<hr />
+
+<img id="sample" style="height: 150px; width: 150px;" />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data" asp-controller="Employee" asp-action="IconUpload">
+
+            <div class="form-group">
+                <div class="form-group">
+                    <label class="file_label linkbtn info">
+                        Select Your Icon Image
+                        <input id="file" type="file" name="file" class="form-control" />
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Next" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        const img = document.querySelector('#sample');
+        const file = document.querySelector('#file');
+        file.addEventListener('change', e => {
+            const r = new FileReader();
+            const f = e.target.files[0];
+            r.addEventListener('load', e => {
+                img.src = e.target.result;
+            });
+            r.readAsDataURL(f);
+        });
+    </script>
+}

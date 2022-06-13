@@ -1,0 +1,116 @@
+﻿:root {
+    --basecolor: 0, 31, 63;
+    --basebgcolor: 255, 127, 127;
+}
+
+body {
+    background: rgb(var(--basebgcolor));
+    color: rgb(var(--basecolor));
+    text-shadow: 1px 1px 2px rgba(var(--basecolor), .3);
+}
+.navbar,
+.footer,
+.table_wrap {
+    background: linear-gradient(225deg, #ff8888, #e67272);
+    box-shadow:
+        -2px 2px 2px #cc6666,
+        2px -2px 2px #ff9898;
+}
+
+label.file_label.linkbtn {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.2em;
+}
+
+label.file_label input {
+    display: none;
+}
+
+.table_wrap {
+    border-radius: 0.5em;
+    padding: .5em;
+}
+.table_wrap .table {
+    border-collapse: unset;
+    /*border-spacing: 0 0.5em;*/
+}
+
+.table_wrap .table tbody td {
+    background: #001f3f;
+    border-bottom: 1px solid #aaa;
+    border-top: none;
+    color: rgb(var(--basebgcolor));
+}
+
+.table_wrap .table thead th {
+    border-bottom: none;
+    border-top: none;
+}
+
+
+
+.btn_wrap {
+    display: flex;
+}
+
+.linkbtn {
+    --btncolor: 3, 175, 214;
+    box-shadow: 0 0 2px rgb(var(--btncolor));
+    box-sizing: border-box;
+    color: rgb(var(--btncolor));
+    display: block;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin: 0 0.2em;
+    overflow: hidden;
+    padding: 0.25em 0.75em;
+    position: relative;
+    transition: all .2s;
+    z-index: 2;
+}
+.linkbtn:hover {
+    /*background: rgba(var(--btncolor), .1);*/
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 0 3px #fff;
+}
+.linkbtn::before {
+    content: "";
+    background: rgb(var(--btncolor));
+    height: 100%;
+    padding: 0 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-95%);
+    transition: all .5s;
+    z-index: -1;
+}
+.linkbtn:hover::before {
+    transform: translateY(0%);
+}
+.linkbtn::after {
+    content: "";
+    background: rgb(var(--btncolor));
+    height: 100%;
+    padding: 0 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(95%);
+    transition: all .5s;
+    z-index: -1;
+}
+.linkbtn:hover::after {
+    transform: translateY(0%);
+}
+
+
+a.linkbtn.caution {
+    --btncolor: 220, 53, 69;
+}
+
+.linkbtn.info {
+    --btncolor: 179, 244, 134;
+}

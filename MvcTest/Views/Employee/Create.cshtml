@@ -1,0 +1,51 @@
+@model List<MvcTest.Models.Department>
+
+@{ ViewData["Title"] = "Create"; }
+
+<h1>Create</h1>
+
+<h4>Employee</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-controller="Employee">
+            <div class="form-group">
+                <label class="control-label" for="EmployeeName">EmployeeName</label>
+                <input id="EmployeeName" name="EmployeeName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="Department">Department</label>
+                <select id="Department" name="Department" class="form-control">
+                    @foreach (Department item in Model)
+                    {
+                        <option value="@item.DepartmentName">
+                            @Html.DisplayFor(model => item.DepartmentName)
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="DateOfJoining">DateOfJoining</label>
+                <input type="date" id="DateOfJoining" name="DateOfJoining" class="form-control" />
+            </div>
+            <!--
+            <div class="form-group" style="display: none">
+                <label asp-for="PhotoFileName" class="control-label"></label>
+                <input type="hidden" asp-for="PhotoFileName" class="form-control"/>
+                <span asp-validation-for="Emp.PhotoFileName" class="text-danger"></span>
+            </div>
+            -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
